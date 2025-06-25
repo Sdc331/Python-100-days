@@ -10,7 +10,6 @@ my_turtle.speed("fastest")
 my_turtle.penup()
 my_turtle.hideturtle()
 ### ------- Hold state information to check against user input later ------
-# states = pandas.read_csv("50_states.csv")["state"].to_list()
 
 data = pandas.read_csv("50_states.csv")
 states = data["state"].to_list()
@@ -24,11 +23,11 @@ while game_is_on:
 
 ### ------------- Check whether answer is valid and not yet guessed --------
     if ans == "Exit":
+         to_learn = [state for state in states if state not in user_guesses]
+         pandas.DataFrame(to_learn).to_csv("Homework states.csv")
          break
     if ans in states and ans not in user_guesses:
             state_data = data[data.state == ans]
-            # x = data.loc[data["state"] == ans].x.item()
-            # y = data.loc[data["state"] == ans].y.item()
             my_turtle.goto(state_data.x.item(), state_data.y.item())
             my_turtle.write(ans)
             score += 1
@@ -39,10 +38,5 @@ while game_is_on:
         my_turtle.write("You won!")
         game_is_on = False
 
-for each in states:
-    if each not in user_guesses:
-         to_learn.append(each)
-to_learn = pandas.DataFrame(to_learn)
-to_learn.to_csv("Homework states.csv")
 
 my_screen.exitonclick()
