@@ -24,20 +24,3 @@ data = pandas.read_csv("nato_phonetic_alphabet.csv")
 translated = {row.letter:row.code for (index,row) in data.iterrows()}
 output = [translated[letter] for letter in user_input]
 print(output)
-
-# print(translated)
-# output = [translated.code for translated.code in translated if translated.letter == split_word]
-# print(output)
-# for (index, row) in data.iterrows():
-#     if row.letter == "Z":
-#         print(row.code)
-
-
-# for letter in split_word:
-#     for (index, row) in data.iterrows():
-#         print(row.get(letter))
-#         if row.letter == letter.upper():
-#             output.append(row.code)
-
-
-# print(output)
