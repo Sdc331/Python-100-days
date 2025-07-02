@@ -10,12 +10,10 @@ MINUTE = datetime.now().minute
 ### Setup response from ISS api to gather current lat/lng ###
 
 current_iss = requests.get("http://api.open-notify.org/iss-now.json")
-iss_lat = current_iss.json()['iss_position']['latitude']
-iss_lat = float(iss_lat)
-iss_lng = current_iss.json()['iss_position']['longitude']
-iss_lng = float(iss_lng)
+data = current_iss.json()
+iss_lat = float(data['iss_position']['latitude'])
+iss_lng = float(data['iss_position']['longitude'])
 
-print(iss_lat, iss_lng)
 
 ### Setup api response from sunrise-sunset.org ###
 
@@ -26,24 +24,24 @@ parameters = {
 }
 sunrise_sunset = requests.get("https://api.sunrise-sunset.org/json", parameters)
 sunrise_sunset.raise_for_status()
-
+sun_data = sunrise_sunset.json()
 ### Format api response into variables to extract minute/hour for sunrise and sunset respectivelly ###
 
-sunrise = sunrise_sunset.json()['results']['sunrise']
-sunrise = sunrise.split("T")
-sunrise = sunrise[1].split(":")
-sunrise_hour = int(sunrise[0])
-sunrise_minute = int(sunrise[1])
+sunrise_hour = int(sun_data['results']['sunrise'].split("T")[1].split(":")[0])
+sunrise_minute = int(sun_data['results']['sunrise'].split("T")[1].split(":")[1])
 
-sunset = sunrise_sunset.json()['results']['sunset']
-sunset = sunset.split("T")
-sunset = sunset[1].split(":")
-sunset_hour = int(sunset[0])
-sunset_minute = int(sunset[1])
+sunset_hour = int(sun_data['results']['sunset'].split("T")[1].split(":")[0])
+sunset_minute = int(sun_data['results']['sunset'].split("T")[1].split(":")[1])
+# sunset = sunset.split("T")
+# sunset = sunset[1].split(":")
+# sunset_hour = int(sunset[0])
+# sunset_minute = int(sunset[1])
 
 
 ### Check if the sun is set and if the current ISS position is CLOSE to set LNG and LAT constants. 
 
 if HOUR <= sunrise_hour and MINUTE <= sunrise_minute or HOUR >= sunset_hour and MINUTE >= sunset_minute:
-    if abs(LAT % iss_lat) <= 1 and abs(LNG % iss_lng) <= 1:
+    if LAT % iss_lat <= 1 and LNG % iss_lng <= 1:
         print("ISS might be visible from your location")
+    else:
+        print("Keep looking")
