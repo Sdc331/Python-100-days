@@ -32,11 +32,6 @@ sunrise_minute = int(sun_data['results']['sunrise'].split("T")[1].split(":")[1])
 
 sunset_hour = int(sun_data['results']['sunset'].split("T")[1].split(":")[0])
 sunset_minute = int(sun_data['results']['sunset'].split("T")[1].split(":")[1])
-# sunset = sunset.split("T")
-# sunset = sunset[1].split(":")
-# sunset_hour = int(sunset[0])
-# sunset_minute = int(sunset[1])
-
 
 ### Check if the sun is set and if the current ISS position is CLOSE to set LNG and LAT constants. 
 
