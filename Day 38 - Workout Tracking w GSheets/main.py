@@ -8,6 +8,7 @@ API_URL = "https://trackapi.nutritionix.com"
 EXE_ENDPOINT = "/v2/natural/exercise"
 USER_ID = os.environ.get("USER_ID")
 SHEETY_URL = f"https://api.sheety.co/{USER_ID}/myWorkouts/workouts"
+AUTH_TOKEN = os.environ.get("AUTH_TOKEN")
 
 today = str(datetime.now().strftime("%d-%m-%Y"))
 time = str(datetime.now().time().strftime("%H:%M"))
@@ -19,6 +20,7 @@ headers_nutr = {
 
 headers = {
     "Content-Type": "application/json",
+    "Authorization": f"Basic {AUTH_TOKEN}"
 }
 
 
