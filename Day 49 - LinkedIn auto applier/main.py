@@ -22,5 +22,17 @@ try:
     driver.find_element(By.CSS_SELECTOR, "#password").send_keys(APPPASS)
     driver.find_element(By.CSS_SELECTOR, '#organic-div > form > div.login__form_action_container > button').click()
 except:
-    pass
+    print("Login failed")
+finally:
+    time.sleep(2)
+    jobs = driver.find_elements(By.CSS_SELECTOR, ".SCRrikJLOkVDfjqcihPoQdLqCIJjaqwREIIFNo > li")
+    for each in jobs:
+        try:
+            each.click()
+            driver.find_element(By.CSS_SELECTOR, '#main > div > div.scaffold-layout__list-detail-inner.scaffold-layout__list-detail-inner--grow > div.scaffold-layout__detail.overflow-x-hidden.jobs-search__job-details > div > div.jobs-search__job-details--container > div > div.job-view-layout.jobs-details > div:nth-child(1) > div > div:nth-child(1) > div > div.relative.job-details-jobs-unified-top-card__container--two-pane > div > div.mt4 > div > button').click()
+            print("Job added")
+        except:
+            print("Job saving failed")
+        finally:
+            time.sleep(0.1)
 # driver.quit()
