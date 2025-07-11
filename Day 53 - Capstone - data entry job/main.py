@@ -4,3 +4,4 @@ ZILLOW_URL = "https://appbrewery.github.io/Zillow-Clone/"
 
 my_miner = DataMiner()
 my_miner.get_data()
+my_miner.send_data()
