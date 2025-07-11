@@ -35,4 +35,3 @@ finally:
             print("Job saving failed")
         finally:
             time.sleep(0.1)
-# driver.quit()
